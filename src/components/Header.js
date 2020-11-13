@@ -1,12 +1,25 @@
-import { Link } from "gatsby"
 import React from "react";
 import styled from 'styled-components';
-import {FaBars} from 'react-icons/fa';
+import { Link } from "gatsby"
+import { FaBars } from 'react-icons/fa';
+import { menuData } from './data/MenuData';
+import { Button } from "./Button";
+
 
 const Header = () => {
   return (
     <Nav>
-      <NavLink to='/'>sPaCeY Explorer</NavLink>
+      <NavLink to='/'>sPaCeY</NavLink>
+      <NavMenu>
+        {menuData.map((menu, index) => {
+          return (
+            <NavLink to={menu.link} key={index}>
+              {menu.title}
+            </NavLink>
+          )
+        })}
+      </NavMenu>
+      <NavBtn> <Button primary="true" round="true" to='/trips' >Book a Filght</Button> </NavBtn>
       <Bars />
     </Nav>
   )
@@ -18,7 +31,7 @@ export default Header
 
 // Targetting styled components
 const Nav = styled.nav`
-  background: navy;
+  background: transparent;
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -33,7 +46,8 @@ const NavLink = styled(Link)`
   align-items: center;
   text-decoration: none;
   padding: 0 1rem;
-  height: 100%
+  height: 100%;
+  /* font-weight: bolder; */
   cursor: pointer;
 `
 
@@ -42,7 +56,7 @@ const Bars = styled(FaBars)`
   display: none;
   color: #fff;
 
-  @media screen and(max-width: 768px){
+  @media screen and (max-width: 768px){
     display: block;
     position: absolute;
     top: 0;
@@ -50,6 +64,26 @@ const Bars = styled(FaBars)`
     transform: translate(-100%,75%);
     font-size: 1.8rem;
     cursor: pointer;
+  }
+`
 
+
+const NavMenu = styled.div`
+  display: flex;
+  align-items: center;
+  /* margin-right: -38px; */
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`
+
+const NavBtn = styled.div `
+  display: flex;
+  align-items: center;
+  margin-right: 24px;
+
+  @media screen and (max-width: 768px) {
+    display: none;
   }
 `
